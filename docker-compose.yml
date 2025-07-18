@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # Serviço do Backend (Node.js + Socket.io)
+  backend:
+    build: ./backend
+    container_name: game-backend
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./backend/src:/app/src # Mapeia o código-fonte para live reload
+    networks:
+      - game-network
+
+  # Serviço do Frontend (Nginx)
+  frontend:
+    build: ./frontend
+    container_name: game-frontend
+    ports:
+      - "5621:80"
+    depends_on:
+      - backend
+    networks:
+      - game-network
+
+networks:
+  game-network:
+    driver: bridge

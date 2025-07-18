@@ -1,0 +1,13 @@
+{
+  "name": "image-guess-game-backend",
+  "version": "1.0.0",
+  "description": "Backend for the Image Guessing Game",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}

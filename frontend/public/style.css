@@ -1,0 +1,241 @@
+:root {
+    --primary-bg: #1a1a2e;
+    --secondary-bg: #16213e;
+    --card-bg: #0f3460;
+    --primary-accent: #e94560;
+    --secondary-accent: #53a8b6;
+    --text-color: #dcdcdc;
+    --light-text: #a0a0a0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    background-color: var(--secondary-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--card-bg);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+header h1 {
+    color: var(--primary-accent);
+    font-weight: 700;
+}
+
+#player-list-container {
+    background-color: var(--primary-bg);
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+}
+
+#player-list-container h2 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+#player-list {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+#player-list li {
+    background-color: var(--secondary-accent);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+}
+
+.screen.active {
+    display: flex;
+}
+
+.screen h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-accent);
+}
+
+.screen p {
+    font-size: 1.1rem;
+    color: var(--light-text);
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+input[type="text"],
+input[type="url"],
+select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    border: 2px solid var(--secondary-accent);
+    background-color: var(--secondary-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+input::placeholder {
+    color: var(--light-text);
+}
+
+button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--primary-accent);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #ff5c77;
+    transform: translateY(-2px);
+}
+
+#start-game-btn, #new-round-btn {
+    background-color: var(--secondary-accent);
+}
+#start-game-btn:hover, #new-round-btn:hover {
+    background-color: #65c2d1;
+}
+
+
+/* Estilos específicos */
+#submission-status, #vote-status {
+    width: 100%;
+    text-align: left;
+}
+#submission-status p, #vote-status p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+#voting-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.voting-card {
+    background-color: var(--secondary-bg);
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.voting-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    background-color: #333;
+}
+
+.voting-card select {
+    width: 100%;
+}
+
+#results-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.result-player-card {
+    background: var(--secondary-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.result-player-card h3 {
+    color: var(--secondary-accent);
+    margin-bottom: 1rem;
+}
+
+.guess-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.guess-item {
+    text-align: center;
+}
+
+.guess-item img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.guess-item p {
+    font-size: 0.9rem;
+    margin: 0.2rem 0;
+    color: var(--text-color);
+}
+.guess-item .correct {
+    color: #4caf50;
+    font-weight: bold;
+}
+.guess-item .incorrect {
+    color: #f44336;
+    font-weight: bold;
+}
