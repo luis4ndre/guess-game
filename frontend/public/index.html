@@ -1,86 +1,127 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adivinhe a Imagem!</title>
+    <title>Adivinhe Quem!</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="container">
         <header>
-            <h1>🖼️ Adivinhe a Imagem!</h1>
-            <div id="player-list-container">
-                <h2>Jogadores Online</h2>
-                <ul id="player-list"></ul>
+            <h1 data-translate="gameTitle"></h1>
+            <div id="game-info">
+                <h2 id="room-display"></h2>
+                <div id="player-list-container">
+                    <h3 data-translate="playersInRoom"></h3>
+                    <ul id="player-list"></ul>
+                </div>
             </div>
         </header>
 
         <main id="game-content">
             <!-- Tela de Login -->
             <div id="login-screen" class="screen active">
-                <h2>Bem-vindo!</h2>
-                <p>Digite seu nome para começar a jogar.</p>
+                <h2 data-translate="welcomeTitle"></h2>
+                <div class="language-selector-container">
+                    <img src="https://flagcdn.com/w40/us.png" alt="English" data-lang="en" class="lang-flag active">
+                    <img src="https://flagcdn.com/w40/br.png" alt="Português (Brasil)" data-lang="pt-br"
+                        class="lang-flag">
+                    <img src="https://flagcdn.com/w40/es.png" alt="Español" data-lang="es" class="lang-flag">
+                </div>
                 <form id="login-form">
-                    <input type="text" id="name-input" placeholder="Seu nome" required autocomplete="off">
-                    <button type="submit">Entrar no Jogo</button>
+                    <input type="text" id="name-input" data-translate-placeholder="yourNamePlaceholder" required
+                        autocomplete="off">
+                    <div id="initial-actions">
+                        <button type="button" id="create-room-btn" data-translate="createRoomBtn"></button>
+                        <button type="button" id="show-join-input-btn" data-translate="joinWithCodeBtn"></button>
+                    </div>
+                    <div id="join-room-section" class="hidden">
+                        <p data-translate="enterRoomCode"></p>
+                        <input type="text" id="room-id-input" data-translate-placeholder="roomCodePlaceholder" required
+                            autocomplete="off" maxlength="5" style="text-transform:uppercase">
+                        <button type="submit" id="join-room-btn" data-translate="joinRoomBtn"></button>
+                    </div>
                 </form>
             </div>
 
             <!-- Tela de Espera Inicial -->
             <div id="waiting-room-screen" class="screen">
-                <h2>Aguardando Jogadores...</h2>
-                <p>O jogo começará quando houver pelo menos 2 jogadores.</p>
-                <button id="start-game-btn" style="display: none;">Iniciar Jogo!</button>
+                <h2 data-translate="waitingForPlayers"></h2>
+                <div id="share-room-code" class="hidden">
+                    <p data-translate="shareThisCode"></p>
+                    <strong id="room-code-display"></strong>
+                </div>
+                <p data-translate="min3Players"></p>
+                <div class="waiting-room-actions">
+                    <button id="show-themes-btn" class="hidden" data-translate="configureThemesBtn"></button>
+                    <button id="start-game-btn" class="hidden" data-translate="startGameBtn"></button>
+                </div>
             </div>
 
-            <!-- Tela de Submissão de Imagem -->
+            <!-- Tela de Configuração de Temas -->
+            <div id="theme-config-screen" class="screen">
+                <h2 data-translate="configureThemesTitle"></h2>
+                <p data-translate="configureThemesDesc"></p>
+                <div id="theme-list-editor"></div>
+                <div class="custom-theme-adder">
+                    <input type="text" id="custom-theme-input" data-translate-placeholder="newCustomThemePlaceholder">
+                    <button type="button" id="add-theme-btn" data-translate="addBtn"></button>
+                </div>
+                <button type="button" id="save-themes-btn" data-translate="saveAndBackBtn"></button>
+            </div>
+
+            <!-- Tela de Submissão -->
             <div id="submission-screen" class="screen">
-                <h2 id="theme-display">Tema da Rodada: Filme</h2>
-                <p>Encontre um link de imagem que represente o tema e cole abaixo.</p>
+                <h2 id="theme-display"></h2>
+                <p id="submission-instruction"></p>
                 <form id="submission-form">
-                    <input type="url" id="image-url-input" placeholder="https://exemplo.com/imagem.png" required>
-                    <button type="submit">Enviar Imagem</button>
+                    <input type="url" id="image-url-input" data-translate-placeholder="pasteLinkPlaceholder" required>
+                    <div class="submission-actions">
+                        <button type="submit" data-translate="submitBtn"></button>
+                        <button type="button" id="skip-theme-btn" class="hidden secondary-action"
+                            data-translate="skipThemeBtn"></button>
+                    </div>
                 </form>
             </div>
 
             <!-- Tela de Espera por Submissões -->
             <div id="waiting-submissions-screen" class="screen">
-                <h2>Aguardando os outros jogadores enviarem suas imagens...</h2>
+                <h2 data-translate="waitingForSubmissions"></h2>
                 <div id="submission-status"></div>
             </div>
 
             <!-- Tela de Votação -->
             <div id="voting-screen" class="screen">
-                <h2>Hora de Votar!</h2>
-                <p>De quem você acha que é cada imagem? Você não pode votar na sua.</p>
+                <h2 data-translate="votingTitle"></h2>
+                <p data-translate="votingDesc"></p>
                 <form id="voting-form">
                     <div id="voting-cards-container"></div>
-                    <button type="submit">Confirmar Votos</button>
+                    <button type="submit" data-translate="confirmVotesBtn"></button>
                 </form>
             </div>
-             
+
             <!-- Tela de Espera por Votos -->
             <div id="waiting-votes-screen" class="screen">
-                <h2>Aguardando os outros jogadores votarem...</h2>
+                <h2 data-translate="waitingForVotes"></h2>
                 <div id="vote-status"></div>
             </div>
 
             <!-- Tela de Resultados -->
             <div id="results-screen" class="screen">
-                <h2>Resultados da Rodada!</h2>
+                <h2 data-translate="resultsTitle"></h2>
                 <div id="results-container"></div>
-                <button id="new-round-btn">Jogar Nova Rodada</button>
+                <button id="new-round-btn" data-translate="playNewRoundBtn"></button>
             </div>
-
         </main>
     </div>
-
-    <!-- O cliente Socket.io é servido automaticamente pelo backend -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="client.js"></script>
 </body>
+
 </html>
